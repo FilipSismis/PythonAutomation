@@ -12,7 +12,7 @@ URL to notepad is a script that can copy URLs from opened browser window into a 
 #### Instructions 
 Copying URLs from a browser, start the script, you need to choose how many tabs it will go through and then the script will sleep for you to change focus into the browser window. When all of the desired URLs are copied the program will exit and you will have your .txt file ready for you. 
 
-Opening URLs from a .txt file, you need to have the .txt inside of the directory with the python script. You need to run the script and then change focus to the browser window you want the links to open to and then it will proceed to open all of the links inside the .txt file. 
+Opening URLs from a .txt file, you need to have the .txt file inside of the directory with the python script. You need to run the script and then change focus to the browser window you want the links to open to and then it will proceed to open all of the links inside the .txt file. 
 #### Requirements
 Packages needed for the script to run:
  - keyboard

@@ -2,10 +2,12 @@ import os
 
 fileList = os.listdir('.//')
 fileList.remove('rename.py')
-try:
-    fileList.remove('Thumbnails')
-except ValueError:
-    print("No thumbnails folder")
+for file in fileList:
+    print('Checking if ' + file + ' is file or dir')
+    eof = os.path.splitext(file)[1]
+    if not eof:
+        fileList.remove(file)
+        print(file + ' was removed from the list')
 
 for file in fileList:
     if(file.endswith(".txt")):

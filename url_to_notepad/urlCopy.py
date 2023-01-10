@@ -14,7 +14,7 @@ base_parser = argparse.ArgumentParser(add_help=False)
 
 subparsers = parser.add_subparsers(dest='mode', help='Sub-commands')
 
-Copy_parser = subparsers.add_parser("paste", help="copy URLs from browser to .txt", parents=[base_parser])
+Copy_parser = subparsers.add_parser("copy", help="copy URLs from browser to .txt", parents=[base_parser])
 Copy_parser.add_argument("-N", "--number", required=True, help="number of tabs", type=int)
 Copy_parser.add_argument("-n", "--name", required=False, help="name of the file(optional)")
 

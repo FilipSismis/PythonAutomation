@@ -2,17 +2,30 @@ import keyboard as keyboard
 import time
 import os
 import win32clipboard
+import argparse
 
-print('(1)...From browser to notepad' + '\n' +
-    '(2)...From notepad to browser' + '\n' + 
-    '(3)...Exit' + '\n' + 
-    '-----------------------------')
-choice = input("Enter your choice:")
+parser = argparse.ArgumentParser(
+    prog="URLCopy",
+    description="Program to copy URLs from browser to .txt file or paste them other way around",
+    epilog="See '<command> --help' to read about a specific sub-command."
+)
 
-if choice == '1':
-    print('(1)...From browser to notepad')
-    nameOfFile = input("Enter name of the .txt file (you can leave blank as well):")
-    numberOfTabs = int(input("Enter number of tabs:"))
+base_parser = argparse.ArgumentParser(add_help=False)
+
+subparsers = parser.add_subparsers(dest='mode', help='Sub-commands')
+
+Copy_parser = subparsers.add_parser("paste", help="copy URLs from browser to .txt", parents=[base_parser])
+Copy_parser.add_argument("-N", "--number", required=True, help="number of tabs", type=int)
+Copy_parser.add_argument("-n", "--name", required=False, help="name of the file(optional)")
+
+Paste_parser = subparsers.add_parser("paste", help="paste URLs from .txt to browser", parents=[base_parser])
+
+args = parser.parse_args()
+
+if args.mode == 'copy':
+    print('Copy mode from browser to notepad')
+    nameOfFile = args.name
+    numberOfTabs = args.number
     links =[]
     
     print('Sleeping for 2 seconds')
@@ -39,8 +52,8 @@ if choice == '1':
         file.write(link + "\n")
     file.close
 
-elif choice == '2':
-    print('(2)...From notepad to browser')
+elif args.mode == 'paste':
+    print('Paste mode from notepad to browser')
     print('Sleeping for 2 seconds')
     time.sleep(2)
 
@@ -67,7 +80,3 @@ elif choice == '2':
         time.sleep(0.1)
         keyboard.press_and_release('enter')
         time.sleep(0.1)
-            
-else:
-    print('Wrong input!')
-

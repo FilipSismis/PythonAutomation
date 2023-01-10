@@ -9,6 +9,9 @@ Rename script is a python script that renames all of the files inside a director
 You don't need any extra packages to run this script.
 ## URLcopy script
 URL to notepad is a script that can copy URLs from opened browser window into a .txt file and also it can open URLs, backwards, from a .txt file into a browser window.
+```
+ urlCopy [Command]
+```
 #### Commands 
 ```
  copy              copies URLs from your browser to .txt file

@@ -18,7 +18,8 @@ Copy_parser = subparsers.add_parser("copy", help="copy URLs from browser to .txt
 Copy_parser.add_argument("-N", "--number", required=True, help="number of tabs", type=int)
 Copy_parser.add_argument("-n", "--name", required=False, help="name of the file(optional)")
 
-Paste_parser = subparsers.add_parser("paste", help="paste URLs from .txt to browser", parents=[base_parser])
+Paste_parser = subparsers.add_parser("paste_browser", help="paste URLs from .txt to browser", parents=[base_parser])
+Paste_parser = subparsers.add_parser("paste_download", help="paste URLs from .txt to JDonwloader", parents=[base_parser])
 
 args = parser.parse_args()
 
@@ -52,7 +53,7 @@ if args.mode == 'copy':
         file.write(link + "\n")
     file.close
 
-elif args.mode == 'paste':
+elif args.mode == 'paste_browser':
     print('Paste mode from notepad to browser')
     print('Sleeping for 2 seconds')
     time.sleep(2)
@@ -80,3 +81,30 @@ elif args.mode == 'paste':
         time.sleep(0.1)
         keyboard.press_and_release('enter')
         time.sleep(0.1)
+
+elif args.mode == 'paste_download':
+    print('Paste mode from notepad to JDownloader')
+    print('Sleeping for 2 seconds')
+    time.sleep(2)
+
+    filePath = ""
+    fileList = os.listdir('.//')
+    
+    for file in fileList:
+        if(file.endswith(".txt")):
+            filePath = file
+            continue    
+            
+    file = open(filePath , "r")
+    links = file.read().splitlines()
+    file.close
+    
+    for link in links:
+        win32clipboard.OpenClipboard()
+        win32clipboard.EmptyClipboard()
+        win32clipboard.SetClipboardText(link)
+        win32clipboard.CloseClipboard()
+        keyboard.press_and_release('ctrl+v')
+        time.sleep(0.5)
+        keyboard.press_and_release('enter')
+        time.sleep(0.5)
